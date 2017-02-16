@@ -230,6 +230,9 @@ void ne10_log(const char *func_name,
               ne10_float32_t time_speedup)
 {
     int byte_count = 0;
+    if ((ne10_log_buffer_ptr - ne10_log_buffer) >= sizeof(ne10_log_buffer)) {
+        printf("Warning: out of bounds\n");
+    }
     byte_count = sprintf(ne10_log_buffer_ptr,
                          "{ \"name\" : \"%s %d\", \"time_c\" : %d, "
                          "\"time_neon\" : %d },",
